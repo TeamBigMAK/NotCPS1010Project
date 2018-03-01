@@ -1,0 +1,7 @@
+{>"layout" /}
+
+{<body}
+    {#test}
+        {word} </br>
+    {/test}
+{/body}
