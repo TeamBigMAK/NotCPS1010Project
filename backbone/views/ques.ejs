@@ -1,0 +1,10 @@
+<h1> List of questions</h1>
+
+<% questions.forEach(function(q){ %>
+  <li><%= q.qname %></li>
+<% }); %>
+
+<form action ="/addQues" method="POST">
+    <input type= "text" name="newQues" placeholder="New Question">
+    <button> Add question </button>
+</form>
