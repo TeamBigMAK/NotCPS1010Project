@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Politikapp</title>
+  <link rel = "stylesheet" href="bootstrap.css">
+  <link rel = "stylesheet" href="myCSS.css">
+
+</head>
+<body>
+
+  <script src="bootstrap-4.0.0-dist/js/jquery-3.3.1.min.js"></script>
+  <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Politikapp!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          HI!
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container" id="page1">
+  <div class="jumbotron">
+
+      <h1>Politikapp!</h1>
+  </div>
+  <div class="row">
+    <div  class="col-sm-12"> <button type="button" id="playButton" class="btn btn-outline-dark btn-block buttonPadding">Play</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-sm-12"> <button type="button" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="container noShowPage" id="page2">
+
+  <div class="row">
+      <h2>Question:</h2>
+  </div>
+  <div class="row">
+    <div  class="col-sm-6">
+      <div class="thumbnail">
+        <img class="img-fluid" src="news.png"/>
+      </div>
+    </div>
+  </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 correct">Correct</button>
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+  </div>
+      <div class="offset-xs-6">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+      </div>
+  <div class="row">
+  </div>
+</div>
+
+<script src="loadPage.js"></script>
+
+</body>
+</html>
