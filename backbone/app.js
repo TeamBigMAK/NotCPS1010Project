@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var pg = require("pg");
 var app = express();
 
+var 23;
 
 const pool = new pg.Pool({
 user: 'testUser',
