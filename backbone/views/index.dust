@@ -2,6 +2,6 @@
 
 {<body}
     {#test}
-        {word} </br>
+        {id}: {word} -- Age: {age} </br>
     {/test}
 {/body}

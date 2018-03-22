@@ -4,10 +4,26 @@ var express = require('express'),
     cons = require('consolidate'),
     dust = require('dustjs-helpers'),
     pg = require('pg'),
+    cors = require('cors')
     app = express();
 
 // Connect to DB STRING
 var connectionString = "postgres://projBB:123456@localhost:5432/poldb";
+
+// Enable cors
+app.all('/test/:file', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    console.log("Allowing Access");
+    next()
+});
+
+app.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    console.log("Allowing Access on Root");
+    next()
+});
 
 // Assign dust engine to dust file
 app.engine('dust', cons.dust);
@@ -36,6 +52,24 @@ app.get('/', function(req, res){
             res.render('index', {test: result.rows});
             done();
         });
+    });
+});
+
+app.get('/test/:file', function(req,res, next){
+    console.log("YO FAM WELCOME TO TEST");
+
+    var directory = {
+        root: __dirname + '/public'
+
+    }
+
+    var fName = req.params.file;
+    res.sendFile(fName, directory, function(err){
+        if (err) {
+            next(err);
+        } else {
+            console.log('Sent:', fName);
+        }
     });
 });
 
