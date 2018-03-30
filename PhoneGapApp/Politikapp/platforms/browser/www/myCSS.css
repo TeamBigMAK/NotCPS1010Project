@@ -1,0 +1,20 @@
+.buttonPadding{
+  margin-top:50px;
+}
+
+.buttonPadding2{
+  margin: 10px auto 10px auto;
+}
+
+
+.showPage{
+  display: block;
+}
+
+.noShowPage{
+  display:none;
+}
+
+.articleBorder{
+  border: 2px solid red;
+}
