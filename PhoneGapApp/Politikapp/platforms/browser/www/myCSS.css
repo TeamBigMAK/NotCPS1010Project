@@ -36,7 +36,7 @@
   width: 80%;
   height: 80%;
   margin: 56px 10% 25% 10%;
-/*  border: 2px solid red;*/
+  border: 2px solid red;
   justify-content: center;
   background: #1b2433
 }
@@ -50,14 +50,14 @@
     left: 50%;*/
     font-size: 50px;
     color: green;
-    /*border: 2px solid green;*/
+    border: 2px solid green;
     padding-left: 10px;
 }
 
 #overlayDescription{
   justify-content: center;
   margin: 5px 5px 5px 5px;
-  /*border: 2px solid orange;*/
+  border: 2px solid orange;
 }
 
 #overlayDescriptionText{
@@ -71,7 +71,7 @@
   position: absolute;
   justify-content: center;
   bottom: 0;
-  /*border: 2px solid white;*/
+  border: 2px solid white;
   height: 50px;
   width: 100%;
   padding-top: 5px;
