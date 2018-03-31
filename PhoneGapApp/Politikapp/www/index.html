@@ -45,28 +45,50 @@
 <div class="container noShowPage" id="page2">
 
   <div class="row">
-      <h2>Question:</h2>
+      <h2><span id="questionName"></span></h2>
   </div>
   <div class="row">
     <div  class="col-sm-6">
-      <div class="thumbnail">
-        <img class="img-fluid" src="news.png"/>
+      <div class="thumbnail articleBorder">
+        <!--<img class="img-fluid" src="news.png"/>-->
+        <span id=article></span>
       </div>
     </div>
   </div>
     <div class="col-xs-6">
-      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 correct">Correct</button>
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2" id="correctButton"><span id="correctAnswer"></span></button>
     </div>
     <div class="col-xs-6">
-      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer1"></span></button>
   </div>
       <div class="offset-xs-6">
-        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer2"></span></button>
       </div>
       <div class="col-xs-6">
-        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrong">Wrong</button>
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer3"></span></button>
       </div>
   <div class="row">
+  </div>
+</div>
+
+<div id="overlay" class="noShowPage">
+  <div id="overlayWindow">
+    <div id="overlayStatus">
+      <span id="overlayStatusText">Correct!</span>
+    </div>
+    <div id="overlayDescription">
+      <h2><span id="overlayDescriptionText">Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </span></h2>
+    </div>
+    <div id="buttonSection">
+      <button class="overlayButton" id="learnMore">Learn more</button>
+      <button class="overlayButton" id="Continue">Continue</button>
+    </div>
   </div>
 </div>
 

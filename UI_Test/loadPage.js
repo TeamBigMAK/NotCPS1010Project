@@ -9,7 +9,13 @@ var question = document.getElementById("questionName");
 var article = document.getElementById("article");
 var wrongButton = document.getElementsByClassName("wrongButton")
 var correctButton = document.getElementById("correctButton");
+var overlay = document.getElementById("overlay");
+var overlayStatusText = document.getElementById("overlayStatusText");
+var overlayDescription = document.getElementById("overlayDescriptionText");
+var learnMoreButton = document.getElementById("learnMore");
+var continueButton = document.getElementById("Continue");
 var questionNum = -1;//-1 since nextQuestion increments this value and arrays start from 0
+var isAnswerCorrect = false;
 var questions =[
   {
     question : "Who wrote this?",
@@ -19,7 +25,7 @@ var questions =[
     wrongAnswer2 : "zaren",
     wrongAnswer3 : "boq",
     extraInfo : "PN Said that!",
-    articleLink : "www.google.com",
+    articleLink : "https://www.google.com",
   },
   {
     question : "Now, Who wrote this question?",
@@ -29,7 +35,7 @@ var questions =[
     wrongAnswer2 : "zaren",
     wrongAnswer3 : "boq",
     extraInfo : "PL said those words",
-    articleLink : "www.amazon.com",
+    articleLink : "https://www.amazon.com",
   },
   {
     question : "Who could have written this?",
@@ -39,7 +45,7 @@ var questions =[
     wrongAnswer2 : "pl",
     wrongAnswer3 : "boq",
     extraInfo : "this doesn't even need an explanation",
-    articleLink : "www.bing.com",
+    articleLink : "https://www.bing.com",
   }
 ];
 
@@ -65,25 +71,39 @@ playButton.addEventListener("click", function(){
 correctButton.addEventListener("click", function(){
   this.classList.remove("btn-outline-dark");
   this.classList.add("btn-outline-success");
+  isAnswerCorrect = true;
   afterAnswer();
 });
 
 wrongButton[0].addEventListener("click", function(){
   this.classList.remove("btn-outline-dark");
   this.classList.add("btn-outline-danger");
+  isAnswerCorrect = false;
   afterAnswer();
 });
 
 wrongButton[1].addEventListener("click", function(){
   this.classList.remove("btn-outline-dark");
   this.classList.add("btn-outline-danger");
+  isAnswerCorrect = false;
   afterAnswer();
 });
 
 wrongButton[2].addEventListener("click", function(){
   this.classList.remove("btn-outline-dark");
   this.classList.add("btn-outline-danger");
+  isAnswerCorrect = false;
   afterAnswer();
+});
+
+learnMoreButton.addEventListener("click", function(){
+  window.open(questions[questionNum].articleLink);
+});
+
+continueButton.addEventListener("click", function(){
+  overlay.classList.add("noShowPage");
+  resetButtonsStyle();
+  nextQuestion();
 });
 
 function nextQuestion()
@@ -95,12 +115,24 @@ function nextQuestion()
   wrong1.textContent = questions[questionNum].wrongAnswer1;
   wrong2.textContent = questions[questionNum].wrongAnswer2;
   wrong3.textContent = questions[questionNum].wrongAnswer3;
+  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+  articleLink = questions[questionNum].articleLink;
 }
 
 function afterAnswer()
 {
-  resetButtonsStyle();
-  nextQuestion();
+  if(isAnswerCorrect===true)
+  {
+      overlayStatusText.style.color = "green";
+      overlayStatusText.textContent = "Correct!";
+  }
+  else
+  {
+    overlayStatusText.style.color = "red";
+    overlayStatusText.textContent = "Wrong!";
+  }
+  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+  overlay.classList.remove("noShowPage");
 }
 
 function resetButtonsStyle()
