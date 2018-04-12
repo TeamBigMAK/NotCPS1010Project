@@ -18,6 +18,8 @@ var learnMoreButton = document.getElementById("learnMore");
 var continueButton = document.getElementById("Continue");
 var correctButtonNumber = 0; //this value is the index used to indicate which button holds the correct answer
 var questionNum = -1;//-1 since nextQuestion increments this value and arrays start from 0
+var tryNumber = 0; //used for keeping track of the number of tries (2 max)
+
 var isAnswerCorrect = false;
 var questions =[
   {
@@ -155,8 +157,11 @@ learnMoreButton.addEventListener("click", function(){
 
 continueButton.addEventListener("click", function(){
   overlay.classList.add("noShowPage");
+  if(isAnswerCorrect===true)
+  {
   resetButtonsStyle();
   nextQuestion();
+  }
 });
 
 function nextQuestion()
@@ -202,18 +207,45 @@ function nextQuestion()
 //responsible for diplaying the overlay after the answer
 function afterAnswer()
 {
+  tryNumber++;
+  if(isChoiceCorrect())
+  {
+    overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+    learnMoreButton.classList.remove("noShowPage");
+    overlay.classList.remove("noShowPage");
+  }
+  else
+  {
+    if(tryNumber === 2)
+    {
+      overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+      learnMoreButton.classList.remove("noShowPage");
+      overlay.classList.remove("noShowPage");
+      isAnswerCorrect = true;//the overlay is already shown at this point so by making correct answer true it will allow the continue button to load the next question
+    }
+    else
+    {
+      overlayDescriptionText.textContent = "Try again!";
+      learnMoreButton.classList.add("noShowPage");
+      overlay.classList.remove("noShowPage");
+    }
+  }
+}
+
+function isChoiceCorrect()
+{
   if(isAnswerCorrect===true)
   {
     overlayStatusText.style.color = "green";
     overlayStatusText.textContent = "Correct!";
+    return true;
   }
   else
   {
     overlayStatusText.style.color = "red";
     overlayStatusText.textContent = "Wrong!";
+    return false;
   }
-  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
-  overlay.classList.remove("noShowPage");
 }
 
 function resetButtonsStyle()
