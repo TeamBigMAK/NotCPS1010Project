@@ -1,0 +1,26 @@
+h1{
+  text-align: center;
+  color: White;
+  width:100%;
+  /*background-color: #444444;/*linear-gradient(to bottom,#252c42,#2c3551);*/
+}
+
+body{
+  /*background-color: #191919;/*linear-gradient(to bottom,#252c42,#252c42);*/
+  background-image: url("images/testImage.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.butt button{
+  background-color: #296cd8; /* Green background */
+  border: none; /* Green border
+  color: white; /* White text */
+  padding: 15px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  width: 25%; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+  margin: auto;
+  margin-top: 50px ;
+  box-shadow: 0px 5px 0px 0px #2059b5;
+}

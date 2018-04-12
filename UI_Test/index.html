@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Politikapp</title>
+  <link rel = "stylesheet" href="bootstrap.css">
+  <link rel = "stylesheet" href="myCSS.css">
+
+</head>
+<body>
+
+  <script src="bootstrap-4.0.0-dist/js/jquery-3.3.1.min.js"></script>
+  <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Politikapp!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          HI!
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container" id="page1">
+  <div class="jumbotron">
+
+      <h1>Politikapp!</h1>
+  </div>
+  <div class="row">
+    <div  class="col-sm-12"> <button type="button" id="playButton" class="btn btn-outline-dark btn-block buttonPadding">Play</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-sm-12"> <button type="button" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="container noShowPage" id="page2">
+
+  <div class="row">
+      <h2><span id="questionName"></span></h2>
+  </div>
+  <div class="row">
+    <div  class="col-sm-6">
+      <div class="thumbnail articleBorder">
+        <!--<img class="img-fluid" src="news.png"/>-->
+        <span id=article></span>
+      </div>
+    </div>
+  </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2" id="correctButton"><span id="correctAnswer"></span></button>
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer1"></span></button>
+  </div>
+      <div class="offset-xs-6">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer2"></span></button>
+      </div>
+      <div class="col-xs-6">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 wrongButton"><span id="wrongAnswer3"></span></button>
+      </div>
+  <div class="row">
+  </div>
+</div>
+
+<div id="overlay" class="noShowPage">
+  <div id="overlayWindow">
+    <div id="overlayStatus">
+      <span id="overlayStatusText">Correct!</span>
+    </div>
+    <div id="overlayDescription">
+      <h2><span id="overlayDescriptionText">Lorem ipsum dolor sit amet,
+        consectetur adipisicing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </span></h2>
+    </div>
+    <div id="buttonSection">
+      <button class="overlayButton" id="learnMore">Learn more</button>
+      <button class="overlayButton" id="Continue">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script src="loadPage.js"></script>
+
+</body>
+</html>
