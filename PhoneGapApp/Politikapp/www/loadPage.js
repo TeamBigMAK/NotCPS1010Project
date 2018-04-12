@@ -18,6 +18,8 @@ var learnMoreButton = document.getElementById("learnMore");
 var continueButton = document.getElementById("Continue");
 var correctButtonNumber = 0; //this value is the index used to indicate which button holds the correct answer
 var questionNum = -1;//-1 since nextQuestion increments this value and arrays start from 0
+var try1Score = 10;
+var try2Score = 5;
 var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 
 var isAnswerCorrect = false;
@@ -213,6 +215,7 @@ function afterAnswer()
     overlayDescriptionText.textContent = questions[questionNum].extraInfo;
     learnMoreButton.classList.remove("noShowPage");
     overlay.classList.remove("noShowPage");
+    tryNumber = 0;
   }
   else
   {
@@ -222,6 +225,7 @@ function afterAnswer()
       learnMoreButton.classList.remove("noShowPage");
       overlay.classList.remove("noShowPage");
       isAnswerCorrect = true;//the overlay is already shown at this point so by making correct answer true it will allow the continue button to load the next question
+      tryNumber = 0;
     }
     else
     {
@@ -230,6 +234,7 @@ function afterAnswer()
       overlay.classList.remove("noShowPage");
     }
   }
+  console.log(tryNumber);
 }
 
 function isChoiceCorrect()
