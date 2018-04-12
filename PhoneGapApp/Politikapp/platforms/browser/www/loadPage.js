@@ -21,34 +21,54 @@ var questionNum = -1;//-1 since nextQuestion increments this value and arrays st
 var isAnswerCorrect = false;
 var questions =[
   {
-    question : "Who wrote this?",
-    article : "We (pn) didn't write this",
-    correctAnswer : "pn",
-    wrongAnswer1 : "pl",
-    wrongAnswer2 : "zaren",
-    wrongAnswer3 : "boq",
-    extraInfo : "PN Said that!",
-    articleLink : "https://www.google.com",
+    //question : "Who wrote this?",
+    article : "In January 2018 the number of tourists visiting Malta was approximately:",
+    correctAnswer : "125,000",
+    wrongAnswer1 : "55,000",
+    wrongAnswer2 : "436,000",
+    wrongAnswer3 : "1,125,000",
+    extraInfo : "The correct answer is 125,000",
+    articleLink : "https://nso.gov.mt/en/News_Releases/View_by_Unit/Unit_C3/Tourism_Statistics/Documents/2018/News2018_041.pdf",
   },
   {
-    question : "Now, Who wrote this question?",
-    article : "DEFINITELY NOT PL",
-    correctAnswer : "pl",
-    wrongAnswer1 : "pn",
-    wrongAnswer2 : "zaren",
-    wrongAnswer3 : "boq",
-    extraInfo : "PL said those words",
-    articleLink : "https://www.amazon.com",
+    //question : "Now, Who wrote this question?",
+    article : "Informazzjoni ufficjali dwar kemm hi l-popolazzjoni ta’ Malta",
+    correctAnswer : "Fuq il-website ta’ l-NSO",
+    wrongAnswer1 : "Fuq NetTV",
+    wrongAnswer2 : "Fuq SuperOne",
+    wrongAnswer3 : "Fuq il-website tal-Malta Broadcasting Authority",
+    extraInfo : "The correct answer is the \"NSO website\"",
+    articleLink : "https://nso.gov.mt/en/nso/Selected_Indicators/Pages/Selected-Indicators.aspx",
   },
   {
-    question : "Who could have written this?",
-    article : "ma taghmlu xejn, ma zaren ta l-ajkla",
-    correctAnswer : "zaren",
-    wrongAnswer1 : "pn",
-    wrongAnswer2 : "pl",
-    wrongAnswer3 : "boq",
-    extraInfo : "this doesn't even need an explanation",
-    articleLink : "https://www.bing.com",
+    //question : "Who could have written this?",
+    article : "Skond position paper mahruga mill-MEA, l-persentagg ta’ haddiema barranin jahdmu Malta hu ta’ madwar:",
+    correctAnswer : "18%",
+    wrongAnswer1 : "12%",
+    wrongAnswer2 : "9%",
+    wrongAnswer3 : "25%",
+    extraInfo : "The correct answer is 18%",
+    articleLink : "http://www.maltaemployers.com/loadfile/2e927c34-4b4c-4526-8b35-c65df7152d8b",
+  },
+  {
+    //question : "Who could have written this?",
+    article : "Il-GDP per capita huwa numru li juri:",
+    correctAnswer : "Kull persuna kemm tista tgawdi gid kull sena",
+    wrongAnswer1 : "Kull persuna kemm ghandha dejn",
+    wrongAnswer2 : "Kull persuna kemm hija intelligenti",
+    wrongAnswer3 : "Kull persuna kemm tista taghmel kapricci",
+    extraInfo : "The correct answer is \"Kull persuna kemm tista tgawdi gid kull sena\"",
+    articleLink : "#",
+  },
+  {
+    //question : "Who could have written this?",
+    article : "It-titlu “Rosianne Cutajar tingħata kariga oħra; se tkun responsabbli mit-tnaqqis tal-Burokrazija” huwa mehud minn:",
+    correctAnswer : "Midja tal-PN",
+    wrongAnswer1 : "Midja tal-PL",
+    wrongAnswer2 : "Midja indipendenti",
+    wrongAnswer3 : "Press release ufficjali",
+    extraInfo : "The correct answer is \"Midja tal-PN\"",
+    articleLink : "http://netnews.com.mt/gabra/lokali/page/3/",
   }
 ];
 
@@ -145,7 +165,7 @@ function nextQuestion()
   correctButtonNumber = Math.floor(Math.random()*(3-0+1)+0);
   console.log(correctButtonNumber);
   //getting the contents of next object in the array
-  question.textContent = questions[questionNum].question;
+  question.textContent = "Question #" + (questionNum+1);
   article.textContent = questions[questionNum].article;
   buttonText[correctButtonNumber+4].textContent = questions[questionNum].correctAnswer;
   //setting the content of the other buttons depending on what was generated
@@ -198,7 +218,7 @@ function afterAnswer()
 
 function resetButtonsStyle()
 {
-  for(var i=0+4; i<3+4; i++)
+  for(var i=0+4; i<=3+4; i++)
   {
     if(i===correctButtonNumber)
     {
