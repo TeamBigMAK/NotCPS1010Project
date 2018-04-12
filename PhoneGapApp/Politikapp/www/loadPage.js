@@ -33,7 +33,6 @@ var questions =[
     wrongAnswer1 : "55,000",
     wrongAnswer2 : "436,000",
     wrongAnswer3 : "1,125,000",
-    extraInfo : "The correct answer is 125,000",
     articleLink : "https://nso.gov.mt/en/News_Releases/View_by_Unit/Unit_C3/Tourism_Statistics/Documents/2018/News2018_041.pdf",
   },
   {
@@ -43,7 +42,6 @@ var questions =[
     wrongAnswer1 : "Fuq NetTV",
     wrongAnswer2 : "Fuq SuperOne",
     wrongAnswer3 : "Fuq il-website tal-Malta Broadcasting Authority",
-    extraInfo : "The correct answer is the \"NSO website\"",
     articleLink : "https://nso.gov.mt/en/nso/Selected_Indicators/Pages/Selected-Indicators.aspx",
   },
   {
@@ -53,7 +51,6 @@ var questions =[
     wrongAnswer1 : "12%",
     wrongAnswer2 : "9%",
     wrongAnswer3 : "25%",
-    extraInfo : "The correct answer is 18%",
     articleLink : "http://www.maltaemployers.com/loadfile/2e927c34-4b4c-4526-8b35-c65df7152d8b",
   },
   {
@@ -63,7 +60,6 @@ var questions =[
     wrongAnswer1 : "Kull persuna kemm ghandha dejn",
     wrongAnswer2 : "Kull persuna kemm hija intelligenti",
     wrongAnswer3 : "Kull persuna kemm tista taghmel kapricci",
-    extraInfo : "The correct answer is \"Kull persuna kemm tista tgawdi gid kull sena\"",
     articleLink : "#",
   },
   {
@@ -73,7 +69,6 @@ var questions =[
     wrongAnswer1 : "Midja tal-PL",
     wrongAnswer2 : "Midja indipendenti",
     wrongAnswer3 : "Press release ufficjali",
-    extraInfo : "The correct answer is \"Midja tal-PN\"",
     articleLink : "http://netnews.com.mt/gabra/lokali/page/3/",
   }
 ];
@@ -203,8 +198,7 @@ function nextQuestion()
   };break;
   default: console.log("Number generated was invalid");
 }
-
-  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+  overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
   articleLink = questions[questionNum].articleLink;
 }
 
@@ -214,7 +208,7 @@ function afterAnswer()
   tryNumber++;
   if(isChoiceCorrect())
   {
-    overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+    overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
     learnMoreButton.classList.remove("noShowPage");
     overlay.classList.remove("noShowPage");
     addScore();
@@ -224,7 +218,7 @@ function afterAnswer()
   {
     if(tryNumber === 2)
     {
-      overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+      overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
       learnMoreButton.classList.remove("noShowPage");
       overlay.classList.remove("noShowPage");
       isAnswerCorrect = true;//the overlay is already shown at this point so by making correct answer true it will allow the continue button to load the next question
