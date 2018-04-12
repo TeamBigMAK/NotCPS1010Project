@@ -16,8 +16,10 @@ var overlayStatusText = document.getElementById("overlayStatusText");
 var overlayDescription = document.getElementById("overlayDescriptionText");
 var learnMoreButton = document.getElementById("learnMore");
 var continueButton = document.getElementById("Continue");
+var scoreText = document.getElementById("scoreText");
 var correctButtonNumber = 0; //this value is the index used to indicate which button holds the correct answer
 var questionNum = -1;//-1 since nextQuestion increments this value and arrays start from 0
+var totalScore = 0;
 var try1Score = 10;
 var try2Score = 5;
 var tryNumber = 0; //used for keeping track of the number of tries (2 max)
@@ -215,6 +217,7 @@ function afterAnswer()
     overlayDescriptionText.textContent = questions[questionNum].extraInfo;
     learnMoreButton.classList.remove("noShowPage");
     overlay.classList.remove("noShowPage");
+    addScore();
     tryNumber = 0;
   }
   else
@@ -234,7 +237,6 @@ function afterAnswer()
       overlay.classList.remove("noShowPage");
     }
   }
-  console.log(tryNumber);
 }
 
 function isChoiceCorrect()
@@ -268,4 +270,20 @@ function resetButtonsStyle()
       buttons[i].classList.add("btn-outline-dark");
     }
   }
+}
+
+function addScore()
+{
+  console.log(isAnswerCorrect);
+  console.log("Try: "+tryNumber);
+  if((tryNumber===1) && (isAnswerCorrect===true))
+  {
+    totalScore += try1Score;
+  }
+  else if((tryNumber===2) && (isAnswerCorrect=true))
+  {
+    totalScore += try2Score;
+  }
+  console.log("Score: "+totalScore);
+  scoreText.textContent = totalScore;
 }
