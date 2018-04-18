@@ -7,13 +7,31 @@ from google fonts specified in index.html header
 
 .buttonPadding{
     /*for main screen buttons*/
-    font-family: 'Pacifico';
+    font-family: 'Gaegu';
+    font-weight: 700;
     margin-top:30px;
     margin-bottom:5px;
     text-align: center;
     font-size: 25px;
     padding: 25px 22px;
     /*custom cursor possibility*/
+}
+
+#navText1
+{
+    display:inline;
+   font-family: 'Lato';
+    font-weight: 300; 
+    font-size: 25px;
+}
+
+#navText2
+{
+    display:inline;
+   font-family: 'Lato';
+    font-weight: 700; 
+    font-size: 25px;
+    font-style: italic;
 }
 
 .buttonPadding2{
