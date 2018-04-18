@@ -1,5 +1,19 @@
+/*@font-face
+{
+possibility of other fonts apart
+from google fonts specified in index.html header
+}
+*/
+
 .buttonPadding{
-  margin-top:50px;
+    /*for main screen buttons*/
+    font-family: 'Pacifico';
+    margin-top:30px;
+    margin-bottom:5px;
+    text-align: center;
+    font-size: 25px;
+    padding: 25px 22px;
+    /*custom cursor possibility*/
 }
 
 .buttonPadding2{
@@ -11,6 +25,15 @@
   display: block;
 }*/
 
+#testimg
+{
+    margin-top: 20px;
+    
+    max-width: 85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .showPage{
   display: block;
