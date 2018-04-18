@@ -36,7 +36,11 @@
     </div>
   </div>
   <div class="row">
-    <div  class="col-sm-12"> <button type="button" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
+    <div  class="col-sm-12"> <button type="button" id="options" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-sm-12"> <button type="button" id="load" class="btn btn-outline-dark btn-block buttonPadding">Load</button>
     </div>
   </div>
 </div>
@@ -45,7 +49,12 @@
 <div class="container noShowPage" id="page2">
 
   <div class="row">
-      <h2><span id="questionName"></span></h2>
+      <div class="col-sm-6">
+          <h2><span id="questionName"></span></h2>
+      </div>
+      <div class="col-sm-6 float-right" id="score">
+            <h2>Score: <span id= "scoreText">0</span></h2>
+      </div>
   </div>
   <div class="row">
     <div  class="col-sm-6">

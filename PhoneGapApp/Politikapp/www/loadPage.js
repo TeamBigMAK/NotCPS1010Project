@@ -24,6 +24,8 @@ var try1Score = 10;
 var try2Score = 5;
 var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 
+var load = document.getElementById("load");
+
 var isAnswerCorrect = false;
 var questions =[
   {
@@ -80,11 +82,22 @@ var questions =[
 //Adding event listeners to the different buttons
 playButton.addEventListener("click", function(){
   //console.log(page2);
+  questionNum = -1;
+  totalScore = 0;
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
   nextQuestion();
+  page2.classList.remove("noShowPage");
+});
 
+load.addEventListener("click", function(){
+  loadProgress();
+  const clone = page2.cloneNode(true);
+  while (page1.firstChild) page1.firstChild.remove();
+  page1.appendChild(clone);
+  nextQuestion();
+  scoreText.textContent = totalScore;
   page2.classList.remove("noShowPage");
 });
 
@@ -200,6 +213,7 @@ function nextQuestion()
 }
   overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
   articleLink = questions[questionNum].articleLink;
+  saveProgress();
 }
 
 //responsible for diplaying the overlay after the answer
@@ -280,4 +294,19 @@ function addScore()
   }
   console.log("Score: "+totalScore);
   scoreText.textContent = totalScore;
+}
+
+function loadProgress()
+{
+  var storage = window.localStorage;
+  questionNum = storage.getItem("Progress"); // Pass a key name to get its value.
+  totalScore = storage.getItem("Score");
+  console.log(totalScore);
+}
+
+function saveProgress()
+{
+  var storage = window.localStorage;
+  storage.setItem("Progress",parseInt(questionNum-1)); // Pass a key name to get its value.
+  storage.setItem("Score",parseInt(totalScore));
 }

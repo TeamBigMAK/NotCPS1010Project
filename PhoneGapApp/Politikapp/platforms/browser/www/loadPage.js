@@ -16,8 +16,16 @@ var overlayStatusText = document.getElementById("overlayStatusText");
 var overlayDescription = document.getElementById("overlayDescriptionText");
 var learnMoreButton = document.getElementById("learnMore");
 var continueButton = document.getElementById("Continue");
+var scoreText = document.getElementById("scoreText");
 var correctButtonNumber = 0; //this value is the index used to indicate which button holds the correct answer
 var questionNum = -1;//-1 since nextQuestion increments this value and arrays start from 0
+var totalScore = 0;
+var try1Score = 10;
+var try2Score = 5;
+var tryNumber = 0; //used for keeping track of the number of tries (2 max)
+
+var load = document.getElementById("load");
+
 var isAnswerCorrect = false;
 var questions =[
   {
@@ -27,7 +35,6 @@ var questions =[
     wrongAnswer1 : "55,000",
     wrongAnswer2 : "436,000",
     wrongAnswer3 : "1,125,000",
-    extraInfo : "The correct answer is 125,000",
     articleLink : "https://nso.gov.mt/en/News_Releases/View_by_Unit/Unit_C3/Tourism_Statistics/Documents/2018/News2018_041.pdf",
   },
   {
@@ -37,7 +44,6 @@ var questions =[
     wrongAnswer1 : "Fuq NetTV",
     wrongAnswer2 : "Fuq SuperOne",
     wrongAnswer3 : "Fuq il-website tal-Malta Broadcasting Authority",
-    extraInfo : "The correct answer is the \"NSO website\"",
     articleLink : "https://nso.gov.mt/en/nso/Selected_Indicators/Pages/Selected-Indicators.aspx",
   },
   {
@@ -47,7 +53,6 @@ var questions =[
     wrongAnswer1 : "12%",
     wrongAnswer2 : "9%",
     wrongAnswer3 : "25%",
-    extraInfo : "The correct answer is 18%",
     articleLink : "http://www.maltaemployers.com/loadfile/2e927c34-4b4c-4526-8b35-c65df7152d8b",
   },
   {
@@ -57,7 +62,6 @@ var questions =[
     wrongAnswer1 : "Kull persuna kemm ghandha dejn",
     wrongAnswer2 : "Kull persuna kemm hija intelligenti",
     wrongAnswer3 : "Kull persuna kemm tista taghmel kapricci",
-    extraInfo : "The correct answer is \"Kull persuna kemm tista tgawdi gid kull sena\"",
     articleLink : "#",
   },
   {
@@ -67,7 +71,6 @@ var questions =[
     wrongAnswer1 : "Midja tal-PL",
     wrongAnswer2 : "Midja indipendenti",
     wrongAnswer3 : "Press release ufficjali",
-    extraInfo : "The correct answer is \"Midja tal-PN\"",
     articleLink : "http://netnews.com.mt/gabra/lokali/page/3/",
   }
 ];
@@ -79,11 +82,22 @@ var questions =[
 //Adding event listeners to the different buttons
 playButton.addEventListener("click", function(){
   //console.log(page2);
+  questionNum = -1;
+  totalScore = 0;
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
   nextQuestion();
+  page2.classList.remove("noShowPage");
+});
 
+load.addEventListener("click", function(){
+  loadProgress();
+  const clone = page2.cloneNode(true);
+  while (page1.firstChild) page1.firstChild.remove();
+  page1.appendChild(clone);
+  nextQuestion();
+  scoreText.textContent = totalScore;
   page2.classList.remove("noShowPage");
 });
 
@@ -155,8 +169,11 @@ learnMoreButton.addEventListener("click", function(){
 
 continueButton.addEventListener("click", function(){
   overlay.classList.add("noShowPage");
+  if(isAnswerCorrect===true)
+  {
   resetButtonsStyle();
   nextQuestion();
+  }
 });
 
 function nextQuestion()
@@ -194,26 +211,56 @@ function nextQuestion()
   };break;
   default: console.log("Number generated was invalid");
 }
-
-  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
+  overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
   articleLink = questions[questionNum].articleLink;
+  saveProgress();
 }
 
 //responsible for diplaying the overlay after the answer
 function afterAnswer()
 {
+  tryNumber++;
+  if(isChoiceCorrect())
+  {
+    overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
+    learnMoreButton.classList.remove("noShowPage");
+    overlay.classList.remove("noShowPage");
+    addScore();
+    tryNumber = 0;
+  }
+  else
+  {
+    if(tryNumber === 2)
+    {
+      overlayDescriptionText.textContent = "The correct answer is: \""+questions[questionNum].correctAnswer+"\"";
+      learnMoreButton.classList.remove("noShowPage");
+      overlay.classList.remove("noShowPage");
+      isAnswerCorrect = true;//the overlay is already shown at this point so by making correct answer true it will allow the continue button to load the next question
+      tryNumber = 0;
+    }
+    else
+    {
+      overlayDescriptionText.textContent = "Try again!";
+      learnMoreButton.classList.add("noShowPage");
+      overlay.classList.remove("noShowPage");
+    }
+  }
+}
+
+function isChoiceCorrect()
+{
   if(isAnswerCorrect===true)
   {
     overlayStatusText.style.color = "green";
     overlayStatusText.textContent = "Correct!";
+    return true;
   }
   else
   {
     overlayStatusText.style.color = "red";
     overlayStatusText.textContent = "Wrong!";
+    return false;
   }
-  overlayDescriptionText.textContent = questions[questionNum].extraInfo;
-  overlay.classList.remove("noShowPage");
 }
 
 function resetButtonsStyle()
@@ -231,4 +278,35 @@ function resetButtonsStyle()
       buttons[i].classList.add("btn-outline-dark");
     }
   }
+}
+
+function addScore()
+{
+  console.log(isAnswerCorrect);
+  console.log("Try: "+tryNumber);
+  if((tryNumber===1) && (isAnswerCorrect===true))
+  {
+    totalScore += try1Score;
+  }
+  else if((tryNumber===2) && (isAnswerCorrect=true))
+  {
+    totalScore += try2Score;
+  }
+  console.log("Score: "+totalScore);
+  scoreText.textContent = totalScore;
+}
+
+function loadProgress()
+{
+  var storage = window.localStorage;
+  questionNum = storage.getItem("Progress"); // Pass a key name to get its value.
+  totalScore = storage.getItem("Score");
+  console.log(totalScore);
+}
+
+function saveProgress()
+{
+  var storage = window.localStorage;
+  storage.setItem("Progress",parseInt(questionNum-1)); // Pass a key name to get its value.
+  storage.setItem("Score",parseInt(totalScore));
 }

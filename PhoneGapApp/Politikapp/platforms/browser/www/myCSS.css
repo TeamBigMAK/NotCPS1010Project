@@ -6,6 +6,11 @@
   margin: 10px auto 10px auto;
 }
 
+/*#score{
+  float: right;
+  display: block;
+}*/
+
 
 .showPage{
   display: block;
