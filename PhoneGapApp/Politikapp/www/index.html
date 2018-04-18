@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8">
   <title>Politikapp</title>
   <link rel = "stylesheet" href="bootstrap.css">
   <link rel = "stylesheet" href="myCSS.css">
+  <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
 </head>
 <body>
 
   <script src="bootstrap-4.0.0-dist/js/jquery-3.3.1.min.js"></script>
   <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
 
-  <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">Politikapp!</a>
+  <nav class="navbar navbar-light" style ="background-color: #cceeff;">
+    <a class="navbar-brand" href="#">
+		<img src = "logodecal.png" width="30" height="30" class="d-inline-block align-top">Politikapp!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,21 +29,21 @@
     </div>
   </nav>
 
-<div class="container" id="page1">
-  <div class="jumbotron">
-
-      <h1>Politikapp!</h1>
-  </div>
+<div class="container" id="page1"><br>
+  <img id="testimg" src="svgimg.svg">
+  
   <div class="row">
-    <div  class="col-sm-12"> <button type="button" id="playButton" class="btn btn-outline-dark btn-block buttonPadding">Play</button>
+      <div  class="col-md-4"> </div>
+      <div  class="col-md-4"> <button type="button" id="playButton" class="btn btn-outline-dark btn-block buttonPadding" style="font-size: 2vw;">Play (button size tbd)</button>
     </div>
-  </div>
+    <div  class="col-md-4"></div>
+	</div>
+  
   <div class="row">
     <div  class="col-sm-12"> <button type="button" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
     </div>
   </div>
 </div>
-
 
 <div class="container noShowPage" id="page2">
 
@@ -52,6 +55,7 @@
             <h2>Score: <span id= "scoreText">0</span></h2>
       </div>
   </div>
+  
   <div class="row">
     <div  class="col-sm-6">
       <div class="thumbnail articleBorder">
