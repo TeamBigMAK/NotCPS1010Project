@@ -96,8 +96,8 @@ load.addEventListener("click", function(){
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
-  nextQuestion();
   scoreText.textContent = totalScore;
+  nextQuestion();
   page2.classList.remove("noShowPage");
 });
 
@@ -286,11 +286,11 @@ function addScore()
   console.log("Try: "+tryNumber);
   if((tryNumber===1) && (isAnswerCorrect===true))
   {
-    totalScore += try1Score;
+    totalScore = totalScore + try1Score;
   }
   else if((tryNumber===2) && (isAnswerCorrect=true))
   {
-    totalScore += try2Score;
+    totalScore = totalScore + try2Score;
   }
   console.log("Score: "+totalScore);
   scoreText.textContent = totalScore;
@@ -300,8 +300,8 @@ function loadProgress()
 {
   var storage = window.localStorage;
   questionNum = storage.getItem("Progress"); // Pass a key name to get its value.
-  totalScore = storage.getItem("Score");
-  console.log(totalScore);
+  totalScore = parseInt(storage.getItem("Score"));
+  console.log("Score: "+totalScore);
 }
 
 function saveProgress()
@@ -309,4 +309,5 @@ function saveProgress()
   var storage = window.localStorage;
   storage.setItem("Progress",parseInt(questionNum-1)); // Pass a key name to get its value.
   storage.setItem("Score",parseInt(totalScore));
+  console.log("Score: "+totalScore);
 }
