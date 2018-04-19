@@ -17,6 +17,32 @@ from google fonts specified in index.html header
     /*custom cursor possibility*/
 }
 
+@media screen and (max-width: 600px)
+{
+  #questionName{
+    font-size: 20px;
+  }
+    #scoreName{
+    font-size: 20px;
+  }
+    #scoreText{
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 601px)
+{
+  #questionName{
+    font-size: 35px;
+  }
+    #scoreName{
+    font-size: 35px;
+  }
+    #scoreText{
+        font-size: 35px;
+    }
+}
+
 #navText1
 {
     display:inline;
