@@ -153,6 +153,8 @@ playButton.addEventListener("click", function(){
   //console.log(page2);
   questionNum = -1;
   totalScore = 0;
+  loadQuestionsFromServer();
+  loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
@@ -162,6 +164,8 @@ playButton.addEventListener("click", function(){
 
 load.addEventListener("click", function(){
   loadProgress();
+  loadQuestionsFromServer();
+  loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
