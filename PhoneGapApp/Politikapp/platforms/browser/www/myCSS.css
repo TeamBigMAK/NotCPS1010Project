@@ -1,11 +1,57 @@
+/*@font-face
+{
+possibility of other fonts apart
+from google fonts specified in index.html header
+}
+*/
+
 .buttonPadding{
-  margin-top:50px;
+    /*for main screen buttons*/
+    font-family: 'Gaegu';
+    font-weight: 700;
+    margin-top:30px;
+    margin-bottom:5px;
+    text-align: center;
+    font-size: 25px;
+    padding: 25px 22px;
+    /*custom cursor possibility*/
+}
+
+#navText1
+{
+    display:inline;
+   font-family: 'Lato';
+    font-weight: 300; 
+    font-size: 25px;
+}
+
+#navText2
+{
+    display:inline;
+   font-family: 'Lato';
+    font-weight: 700; 
+    font-size: 25px;
+    font-style: italic;
 }
 
 .buttonPadding2{
   margin: 10px auto 10px auto;
 }
 
+/*#score{
+  float: right;
+  display: block;
+}*/
+
+#testimg
+{
+    margin-top: 20px;
+    
+    max-width: 85%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .showPage{
   display: block;
