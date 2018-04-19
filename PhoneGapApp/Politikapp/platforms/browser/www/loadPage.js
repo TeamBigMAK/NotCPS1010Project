@@ -27,7 +27,8 @@ var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 var load = document.getElementById("load");
 
 var isAnswerCorrect = false;
-var questions =[
+var questions = [];
+/*[
   {
     //question : "Who wrote this?",
     article : "In January 2018 the number of tourists visiting Malta was approximately:",
@@ -73,17 +74,87 @@ var questions =[
     wrongAnswer3 : "Press release ufficjali",
     articleLink : "http://netnews.com.mt/gabra/lokali/page/3/",
   }
-];
+];*/
 
 //NOTE: For some reason, javascript is reading 8 buttonTexts instead of 4 so wherever there is a +4 this means that the program is concerned with the last 4
 //buttons and not the first 4 (since the first 4 are not displaying anything). I know this is a workaround not a solution but it works so shut up.
 
+function loadQuestionsFromServer()
+{
+  var bApp = angular.module('myApp', []);
+
+bApp.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+
+bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $sce)
+{
+    var url = "http://10.68.126.233:3030/qst";
+    var trustedURL = $sce.trustAsResourceUrl(url);
+
+    $http.get(trustedURL).
+        then(function(response) {
+          for(var i=0 ;i<response.length; i++)
+          {
+            questions[i].id = response.qst[i].qid;
+            questions[i].article = response.qst[i].question;
+            questions[i].articleLink = response.qst[i].article;
+          }
+        });
+  }]);
+};
+
+function loadAnswersFromServer()
+{
+    var bApp = angular.module('myApp', []);
+
+  bApp.config(['$qProvider', function ($qProvider) {
+      $qProvider.errorOnUnhandledRejections(false);
+  }]);
+
+  bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $sce)
+  {
+      var url = "http://10.68.126.233:3030/ans";
+      var trustedURL = $sce.trustAsResourceUrl(url);
+
+      $http.get(trustedURL).
+          then(function(response) {
+            var quesProcessed = 0;
+            for(var i=0 ;i<response.length; i++)
+            {
+              if(response.ans[i].correct === "true")
+              question[response.ans[i].qid - 1].correctAnswer= response.ans[i].answer;
+              else
+              {
+                switch(quesProcessed)
+                {
+                  case 1:{
+                    quesProcessed++;
+                    wrongAnswer1 = response.ans[i].answer;
+                  }
+                  case 2:{
+                    quesProcessed++;
+                    wrongAnswer2 = response.ans[i].answer;
+                  }
+                  case 3:{
+                    quesProcessed=1;
+                    wrongAnswer3 = response.ans[i].answer;
+                  }
+                  default:console.log("ERROR LOADING ANSWERS");
+                }
+              }
+            }
+          });
+    }]);
+};
 
 //Adding event listeners to the different buttons
 playButton.addEventListener("click", function(){
   //console.log(page2);
   questionNum = -1;
   totalScore = 0;
+  loadQuestionsFromServer();
+  loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
@@ -93,6 +164,8 @@ playButton.addEventListener("click", function(){
 
 load.addEventListener("click", function(){
   loadProgress();
+  loadQuestionsFromServer();
+  loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
