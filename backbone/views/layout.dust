@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-offset-2 col-md-7">
+            <div id="stuff" class="col-md-offset-2 col-md-7">
                 {+body /}
             </div>
         </div>

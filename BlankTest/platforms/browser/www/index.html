@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Title Change</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    </head>
+    <body>
+        <p>THIS IS TEXT, IT LOADED</p>
+
+        <div ng-app="myApp" ng-controller="bCtrl">
+            <p>Hi my name is {{ name }} and I am {{ age }} years old.</p>
+            <p>Hi my name is {{ name2 }} and I am {{ age2 }} years old.</p>
+            <p>Hi my name is {{ name3 }} and I am {{ age3 }} years old.</p>
+
+
+        </div>
+
+        <form id="test-form" method="POST" action="http://localhost:3030/update">
+            First name: <input type="text" name="fname" ><br>
+            Last name: <input type="text" name="lname" ><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <script type="text/javascript" src="js/request.js"></script>
+
+    </body>
+</html>
