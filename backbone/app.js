@@ -69,6 +69,7 @@ app.get('/', function(req, res){
             }
             res.render('index', {test: result.rows});
             data = result.rows;
+            console.log(data);
             done();
         });
     });
@@ -94,6 +95,7 @@ app.get('/test/:file', function(req,res, next){
 
 app.get('/data', function(req,res){
     return res.json(data);
+
 });
 
 app.post('/update', urlencodedParser, function(req, res){
