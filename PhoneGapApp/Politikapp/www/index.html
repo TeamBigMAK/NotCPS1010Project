@@ -8,7 +8,7 @@
   <link rel = "stylesheet" href="myCSS.css">
   <link href="https://fonts.googleapis.com/css?family=Gaegu:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-  <script src="angular/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
 
@@ -34,7 +34,7 @@
 <div class="container" id="page1"><br>
   <img id="testimg" src="svgimg.svg">
 
-  <div class="row">
+  <div ng-app="myApp" ng-controller="bCtrl" class="row">
       <div  class="col-md-4"> </div>
       <div  class="col-md-4"> <button type="button" id="playButton" class="btn btn-outline-dark btn-block buttonPadding">Play</button>
     </div>

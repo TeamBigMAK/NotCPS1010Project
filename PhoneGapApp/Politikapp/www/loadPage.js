@@ -27,7 +27,48 @@ var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 var load = document.getElementById("load");
 
 var isAnswerCorrect = false;
-var questions = [];
+var questions;
+var answers;
+
+
+// ANGULAR STUFF ------------------------------------------------
+// Assign app
+var bApp = angular.module('myApp', []);
+
+// Remover unhandled rejections
+bApp.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
+
+// Controller
+bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $sce)
+{
+    //Questions URL
+    var qsturl = "http://localhost:3030/qst";
+    var qsttrustedURL = $sce.trustAsResourceUrl(qsturl);
+
+    //Answers URL
+    var ansurl = "http://localhost:3030/ans";
+    var anstrustedURL = $sce.trustAsResourceUrl(ansurl);
+
+    // Get qst
+    $http.get(qsttrustedURL).
+        then(function(response) {
+          console.log(response.data[0].qid);
+          questions = response.data;
+          console.log(questions);
+    });
+
+    // Get ans
+    $http.get(anstrustedURL).
+        then(function(response) {
+          answers = response.data;
+          console.log(answers);
+    });
+}]);
+
+
+//---------------------------------------------------------------
 /*[
   {
     //question : "Who wrote this?",
@@ -79,73 +120,37 @@ var questions = [];
 //NOTE: For some reason, javascript is reading 8 buttonTexts instead of 4 so wherever there is a +4 this means that the program is concerned with the last 4
 //buttons and not the first 4 (since the first 4 are not displaying anything). I know this is a workaround not a solution but it works so shut up.
 
-function loadQuestionsFromServer()
-{
-  var bApp = angular.module('myApp', []);
-
-bApp.config(['$qProvider', function ($qProvider) {
-    $qProvider.errorOnUnhandledRejections(false);
-}]);
-
-bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $sce)
-{
-    var url = "http://10.68.126.233:3030/qst";
-    var trustedURL = $sce.trustAsResourceUrl(url);
-
-    $http.get(trustedURL).
-        then(function(response) {
-          for(var i=0 ;i<response.length; i++)
-          {
-            questions[i].id = response.qst[i].qid;
-            questions[i].article = response.qst[i].question;
-            questions[i].articleLink = response.qst[i].article;
-          }
-        });
-  }]);
-};
 
 function loadAnswersFromServer()
 {
-    var bApp = angular.module('myApp', []);
-
-  bApp.config(['$qProvider', function ($qProvider) {
-      $qProvider.errorOnUnhandledRejections(false);
-  }]);
-
-  bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $sce)
-  {
-      var url = "http://10.68.126.233:3030/ans";
-      var trustedURL = $sce.trustAsResourceUrl(url);
-
-      $http.get(trustedURL).
-          then(function(response) {
-            var quesProcessed = 0;
-            for(var i=0 ;i<response.length; i++)
-            {
-              if(response.ans[i].correct === "true")
-              question[response.ans[i].qid - 1].correctAnswer= response.ans[i].answer;
-              else
-              {
-                switch(quesProcessed)
-                {
-                  case 1:{
-                    quesProcessed++;
-                    wrongAnswer1 = response.ans[i].answer;
-                  }
-                  case 2:{
-                    quesProcessed++;
-                    wrongAnswer2 = response.ans[i].answer;
-                  }
-                  case 3:{
-                    quesProcessed=1;
-                    wrongAnswer3 = response.ans[i].answer;
-                  }
-                  default:console.log("ERROR LOADING ANSWERS");
-                }
-              }
+  //TODO: rearrange the variable names in this function. Don't use "response", but use the variables "questions" and "answers"
+/*      var quesProcessed = 0;
+      for(var i=0 ;i<answers.length; i++)
+      {
+        if(response.ans[i].correct === "true")
+        question[response.ans[i].qid - 1].correctAnswer= response.ans[i].answer;
+        else
+        {
+          switch(quesProcessed)
+          {
+            case 1:{
+              quesProcessed++;
+              wrongAnswer1 = response.ans[i].answer;
             }
-          });
-    }]);
+            case 2:{
+              quesProcessed++;
+              wrongAnswer2 = response.ans[i].answer;
+            }
+            case 3:{
+              quesProcessed=1;
+              wrongAnswer3 = response.ans[i].answer;
+            }
+            default:console.log("ERROR LOADING ANSWERS");
+          }
+        }
+      }
+
+    }]); */
 };
 
 //Adding event listeners to the different buttons
@@ -153,8 +158,7 @@ playButton.addEventListener("click", function(){
   //console.log(page2);
   questionNum = -1;
   totalScore = 0;
-  loadQuestionsFromServer();
-  loadAnswersFromServer();
+  //loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
@@ -164,8 +168,8 @@ playButton.addEventListener("click", function(){
 
 load.addEventListener("click", function(){
   loadProgress();
-  loadQuestionsFromServer();
-  loadAnswersFromServer();
+  //loadQuestionsFromServer();
+  //loadAnswersFromServer();
   const clone = page2.cloneNode(true);
   while (page1.firstChild) page1.firstChild.remove();
   page1.appendChild(clone);
