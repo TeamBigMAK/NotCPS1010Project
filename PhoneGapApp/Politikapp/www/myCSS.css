@@ -2,11 +2,11 @@
     /*for main screen buttons*/
     font-family: 'Gaegu';
     font-weight: 700;
-    margin-top:30px;
+    margin-top:5px;
     margin-bottom:5px;
     text-align: center;
     font-size: 25px;
-    padding: 25px 22px;
+    padding: auto auto;
     /*custom cursor possibility*/
 }
 
@@ -64,9 +64,8 @@
 
 #testimg
 {
-    margin-top: 20px;
-    
-    max-width: 85%;
+    margin-top: 0px;
+    max-width: 90%;
     display: block;
     margin-left: auto;
     margin-right: auto;
