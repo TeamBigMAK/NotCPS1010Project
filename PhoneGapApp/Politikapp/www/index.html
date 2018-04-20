@@ -8,12 +8,12 @@
   <link rel = "stylesheet" href="myCSS.css">
   <link href="https://fonts.googleapis.com/css?family=Gaegu:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-</head>
-<body>
-
   <script src="bootstrap-4.0.0-dist/js/jquery-3.3.1.min.js"></script>
   <script src="bootstrap-4.0.0-dist/js/bootstrap.bundle.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
 
   <nav class="navbar navbar-light" style ="background-color: #cceeff;">
     <a class="navbar-brand" href="#">
@@ -31,7 +31,8 @@
     </div>
   </nav>
 
-<div class="container" id="page1"><br>
+<div class="container" id="page1">
+    <br>
   <img id="testimg" src="svgimg.svg">
 
   <div ng-app="myApp" ng-controller="bCtrl" class="row">
@@ -45,6 +46,7 @@
     <div  class="col-sm-12"> <button type="button" id="options" class="btn btn-outline-dark btn-block buttonPadding">Options</button>
     </div>
   </div>
+
   <div class="row">
     <div  class="col-sm-12"> <button type="button" id="load" class="btn btn-outline-dark btn-block buttonPadding">Load</button>
     </div>
@@ -53,7 +55,20 @@
 
 <div class="container noShowPage" id="page2">
 
+<div class="grid-container">
+    <div class="grid-item-lt" id="questionName"></div>
+    <div class="grid-item-rt" id="score">Score: <span id="scoreText">0</span></div>
+</div>
+<!--
   <div class="row">
+      <div class="col-xs-3">
+      <span id="questionName"></span>
+      </div>
+      <div class="col-xs-6">
+      </div>
+      <div class="col-xs-3" id="score">
+      <span id="scoreName">Score:<span id="scoreText">0</span></span>
+      </div>
 
       <div class="col-sm-6">
             <h2><span id="questionName"></span></h2>
@@ -64,29 +79,29 @@
       </div>
 
   </div>
+-->
 
   <div class="row">
-    <div  class="col-sm-6">
+    <div  class="col-xs-12 col-sm-12 col-md-12">
       <div class="thumbnail articleBorder">
-        <!--<img class="img-fluid" src="news.png"/>-->
-        <span id=article></span>
+        <div id=article></div>
       </div>
     </div>
   </div>
-    <div class="col-xs-6">
-      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice"><span class="buttonText"></span></button>
+
+     <div class="col-xs-12">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice buttonText"></button>
     </div>
-    <div class="col-xs-6">
-      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice"><span class="buttonText"></span></button>
+    <div class="col-xs-12">
+      <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice buttonText"></button>
   </div>
-      <div class="offset-xs-6">
-        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice"><span class="buttonText"></span></button>
+      <div class="offset-xs-12">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice buttonText"></button>
       </div>
-      <div class="col-xs-6">
-        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice"><span class="buttonText"></span></button>
+      <div class="col-xs-12">
+        <button type="button" class="btn btn-outline-dark btn-block buttonPadding2 buttonChoice buttonText"></button>
       </div>
-  <div class="row">
-  </div>
+
 </div>
 
 <div id="overlay" class="noShowPage">
