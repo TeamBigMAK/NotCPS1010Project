@@ -27,9 +27,11 @@ var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 var load = document.getElementById("load");
 
 var isAnswerCorrect = false;
-var questions;
+var questions = [];
+var questionsList;
 var answers;
 
+loadAnswersFromServer();
 
 // ANGULAR STUFF ------------------------------------------------
 // Assign app
@@ -55,7 +57,7 @@ bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $s
     $http.get(qsttrustedURL).
         then(function(response) {
           console.log(response.data[0].qid);
-          questions = response.data;
+          questionsList = response.data;
           console.log(questions);
     });
 
@@ -124,33 +126,56 @@ bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $s
 function loadAnswersFromServer()
 {
   //TODO: rearrange the variable names in this function. Don't use "response", but use the variables "questions" and "answers"
-/*      var quesProcessed = 0;
-      for(var i=0 ;i<answers.length; i++)
-      {
-        if(response.ans[i].correct === "true")
-        question[response.ans[i].qid - 1].correctAnswer= response.ans[i].answer;
-        else
-        {
-          switch(quesProcessed)
-          {
-            case 1:{
-              quesProcessed++;
-              wrongAnswer1 = response.ans[i].answer;
-            }
-            case 2:{
-              quesProcessed++;
-              wrongAnswer2 = response.ans[i].answer;
-            }
-            case 3:{
-              quesProcessed=1;
-              wrongAnswer3 = response.ans[i].answer;
-            }
-            default:console.log("ERROR LOADING ANSWERS");
-          }
+     var quesProcessed = 1;
+     //var tempQuestion;
+     var tempArticle;
+     var tempWrongAnswer1;
+     var tempWrongAnswer2;
+     var tempWrongAnswer3;
+     var tempCorrectAnswer;
+     var tempArticleLink;
+     for(var i= 0; i<questionsList.length;i++)
+     {
+       tempArticle = questionsList.data[i].question;
+       tempArticleLink = questionsList.data[i].article;
+       for(var j=0 ;j<answers.length; j++)
+       {
+         //change to string if it doesnt work
+         //if answers qid is equal to questions qid, input in object
+         if(answers.data[j].qid === questionsList.data[i].qid)
+         {
+           if(answers.data[j].correct==="true")tempCorrectAnswer = answers.data[j].answer;
+           else
+           {
+             switch(quesProcessed)
+             {
+               case 1:{
+                 quesProcessed++;
+                 tempWrongAnswer1 = answer.data[j].answer;
+               }
+               case 2:{
+                 quesProcessed++;
+                 tempWrongAnswer2 = answer.data[j].answer;
+               }
+               case 3:{
+                 quesProcessed=1;
+                 tempWrongAnswer3 = answer.data[j].answer;
+               }
+               default:console.log("ERROR LOADING ANSWERS");
+             }
+           }
+         }
+       }
+       var tempObject = {
+         article : tempArticle,
+         correctAnswer : tempCorrectAnswer,
+         wrongAnswer1 : tempWrongAnswer1,
+         wrongAnswer2 : tempWrongAnswer2,
+         wrongAnswer3 : tempWrongAnswer3,
+         articleLink : tempArticleLink,
         }
-      }
-
-    }]); */
+        questions.push(tempObject);
+     }
 };
 
 //Adding event listeners to the different buttons
