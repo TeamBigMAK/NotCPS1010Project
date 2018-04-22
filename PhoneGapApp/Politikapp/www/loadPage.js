@@ -31,7 +31,6 @@ var questions = [];
 var questionsList;
 var answers;
 
-loadAnswersFromServer();
 
 // ANGULAR STUFF ------------------------------------------------
 // Assign app
@@ -413,3 +412,5 @@ function saveProgress()
   storage.setItem("Score",parseInt(totalScore));
   console.log("Score: "+totalScore);
 }
+
+loadAnswersFromServer();
