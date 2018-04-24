@@ -27,7 +27,9 @@ var tryNumber = 0; //used for keeping track of the number of tries (2 max)
 var load = document.getElementById("load");
 
 var isAnswerCorrect = false;
-var questions;
+var questions = [];
+var qlength, alength;
+var questionsList;
 var answers;
 
 
@@ -54,17 +56,100 @@ bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $s
     // Get qst
     $http.get(qsttrustedURL).
         then(function(response) {
-          console.log(response.data[0].qid);
-          questions = response.data;
-          console.log(questions);
+          questionsList = response.data;
+          qlength = response.data.length;
+          console.log(questionsList);
     });
 
     // Get ans
     $http.get(anstrustedURL).
         then(function(response) {
           answers = response.data;
+          alength = response.data.length;
           console.log(answers);
+          //loadAnswersFromServer();
+//--------------------------------------------------------------------------------
+//TODO: rearrange the variable names in this function. Don't use "response", but use the variables "questions" and "answers"
+   var quesProcessed = 1;
+   //var tempQuestion;
+   var tempArticle;
+   var tempWrongAnswer1;
+   var tempWrongAnswer2;
+   var tempWrongAnswer3;
+   var tempCorrectAnswer;
+   var tempArticleLink;
+   for(var i= 0; i<qlength;i++)
+   {
+     tempArticle = questionsList[i].question;
+     tempArticleLink = questionsList[i].article;
+     for(var j=0 ;j<answers.length; j++)
+     {
+       //change to string if it doesnt work
+       //if answers qid is equal to questions qid, input in object
+       if(answers[j].qid === questionsList[i].qid)
+       {
+         if(answers[j].correct==true){
+           tempCorrectAnswer = answers[j].answer;
+           console.log("tempCorrectANs: " + tempCorrectAnswer + "in iteration " + j);
+         } else
+         {
+           console.log("Not correct answer: " + j);
+           switch(quesProcessed)
+           {
+             case 1:{
+               quesProcessed++;
+               tempWrongAnswer1 = answers[j].answer;
+               break;
+             }
+             case 2:{
+               quesProcessed++;
+               tempWrongAnswer2 = answers[j].answer;
+               break;
+             }
+             case 3:{
+               quesProcessed=1;
+               tempWrongAnswer3 = answers[j].answer;
+               break;
+             }
+             default:console.log("ERROR LOADING ANSWERS");
+           }
+         }
+       }
+     }
+     console.log("WRONG ANS 1: " + tempWrongAnswer1);
+     console.log("WRONG ANS 2: " + tempWrongAnswer2);
+     console.log("WRONG ANS 3: " + tempWrongAnswer3);
+     console.log("Finished all the fors");
+     /*var tempObject = {
+       article : tempArticle,
+       correctAnswer : tempCorrectAnswer,
+       wrongAnswer1 : tempWrongAnswer1,
+       wrongAnswer2 : tempWrongAnswer2,
+       wrongAnswer3 : tempWrongAnswer3,
+       articleLink : tempArticleLink
+      }
+      questions.push(tempObject);
+      console.log(tempObject);
+      console.log(questions); */
+
+      var tempObject = '{ "article": \"'+ tempArticle+'\","correctAnswer": \"'+tempCorrectAnswer+'\", "wrongAnswer1": \"'+tempWrongAnswer1+'\","wrongAnswer2": \"'+tempWrongAnswer2+'\","wrongAnswer3": \"'+tempWrongAnswer3+'\",\"articleLink\" : \"'+tempArticleLink+'\"}';
+      console.log("tempObject: " + tempObject);
+      //parsing that string to turn it into a javascript object
+      var tempJSON = JSON.parse(tempObject);
+      //pushing obejct to array WHICH SHOULD HOPEFULLY WORK PLS THX
+      console.log("tempJSON:");
+      console.log(tempJSON);
+      questions.push(tempJSON);
+      console.log(tempJSON);
+      console.log(questions);
+   }
+
+//-------------------------------------------------------------------------------------
+          console.log("Finished loading from server");
     });
+    //function loadAnswersFromServer(){}
+
+
 }]);
 
 
@@ -120,38 +205,6 @@ bApp.controller('bCtrl', [ '$scope', '$http', '$sce', function($scope, $http, $s
 //NOTE: For some reason, javascript is reading 8 buttonTexts instead of 4 so wherever there is a +4 this means that the program is concerned with the last 4
 //buttons and not the first 4 (since the first 4 are not displaying anything). I know this is a workaround not a solution but it works so shut up.
 
-
-function loadAnswersFromServer()
-{
-  //TODO: rearrange the variable names in this function. Don't use "response", but use the variables "questions" and "answers"
-/*      var quesProcessed = 0;
-      for(var i=0 ;i<answers.length; i++)
-      {
-        if(response.ans[i].correct === "true")
-        question[response.ans[i].qid - 1].correctAnswer= response.ans[i].answer;
-        else
-        {
-          switch(quesProcessed)
-          {
-            case 1:{
-              quesProcessed++;
-              wrongAnswer1 = response.ans[i].answer;
-            }
-            case 2:{
-              quesProcessed++;
-              wrongAnswer2 = response.ans[i].answer;
-            }
-            case 3:{
-              quesProcessed=1;
-              wrongAnswer3 = response.ans[i].answer;
-            }
-            default:console.log("ERROR LOADING ANSWERS");
-          }
-        }
-      }
-
-    }]); */
-};
 
 //Adding event listeners to the different buttons
 playButton.addEventListener("click", function(){
