@@ -1,0 +1,7 @@
+{>"layout" /}
+
+{<body}
+    {#test}
+        {id}: {word} -- Age: {age} </br>
+    {/test}
+{/body}
